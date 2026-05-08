@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta — Sistema Comercial · Décima Tango Academy · ND_</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --verde: #3D9E28;
+  --verde-dark: #2C7A1C;
+  --verde-dim: rgba(61,158,40,0.09);
+  --crema: #F4F0E8;
+  --crema-dark: #E5DFCF;
+  --crema-mid: #EDE8DC;
+  --tinta: #181C19;
+  --tinta-mid: #363B37;
+  --tinta-suave: #636860;
+  --blanco: #FAF8F2;
+  --riesgo: #B05840;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--crema);
+  color: var(--tinta);
+  overflow-x: hidden;
+}
+
+.container { max-width: 1080px; margin: 0 auto; padding: 0 48px; }
+
+/* NAV */
+nav { background: var(--crema); padding: 26px 0; }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 1rem; color: var(--tinta); }
+.nav-meta { font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--tinta-suave); }
+
+/* HERO */
+.hero {
+  background: var(--verde);
+  padding: 88px 0 72px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: -50%; width: 200%; height: 200%;
+  pointer-events: none; z-index: 2;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)' opacity='0.42'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  mix-blend-mode: multiply;
+}
+.hero .container { position: relative; z-index: 3; }
+
+.hero-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.04em;
+  margin-bottom: 28px;
+  display: block;
+}
+.hero h1 {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4vw, 3.8rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin-bottom: 24px;
+  max-width: 820px;
+}
+.hero h1 em { font-style: italic; color: rgba(255,255,255,0.32); }
+.hero-sub {
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  color: rgba(255,255,255,0.68);
+  max-width: 560px;
+  font-weight: 300;
+  line-height: 1.75;
+}
+.hero-meta-row {
+  display: flex;
+  gap: 48px;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.14);
+  flex-wrap: wrap;
+}
+.hero-meta-item .lbl {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.hero-meta-item .val {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+/* SECTIONS */
+section { padding: 88px 0; background: var(--crema); }
+section.alt { background: var(--crema-mid); }
+
+.section-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--verde);
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: 16px;
+}
+section h2 {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  color: var(--tinta);
+  margin-bottom: 16px;
+  max-width: 680px;
+}
+.section-sub {
+  font-size: 0.98rem;
+  color: var(--tinta-suave);
+  max-width: 560px;
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 48px;
+}
+
+/* PROBLEMA */
+.prob-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--crema-dark);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.prob-card {
+  background: var(--crema);
+  padding: 36px 32px;
+  transition: background 0.2s;
+}
+.prob-card:hover { background: var(--blanco); }
+.prob-num {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: var(--crema-dark);
+  line-height: 1;
+  margin-bottom: 20px;
+  letter-spacing: -0.05em;
+}
+.prob-card h3 {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--tinta);
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+.prob-card p {
+  font-size: 0.88rem;
+  color: var(--tinta-suave);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* SOLUCIÓN */
+.sol-stack { display: flex; flex-direction: column; gap: 10px; }
+
+.sol-block {
+  background: var(--blanco);
+  border: 1px solid var(--crema-dark);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.sol-block.open { border-color: var(--verde); }
+
+.sol-head {
+  padding: 28px 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  transition: background 0.15s;
+}
+.sol-head:hover { background: var(--crema); }
+
+.sol-num {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.68rem;
+  color: var(--verde);
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.sol-head-body { flex: 1; }
+.sol-title {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--tinta);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.sol-resumen {
+  font-size: 0.9rem;
+  color: var(--tinta-suave);
+  line-height: 1.7;
+  font-weight: 300;
+}
+.sol-toggle {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--verde);
+  background: var(--verde-dim);
+  border: 1px solid rgba(61,158,40,0.18);
+  border-radius: 100px;
+  padding: 5px 12px;
+  flex-shrink: 0;
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.sol-block.open .sol-toggle { background: var(--verde); color: #fff; }
+.sol-toggle .arr { transition: transform 0.25s; }
+.sol-block.open .sol-toggle .arr { transform: rotate(180deg); }
+
+.sol-detail {
+  display: none;
+  border-top: 1px solid var(--crema-dark);
+  padding: 28px 32px;
+  background: var(--crema-mid);
+}
+.sol-block.open .sol-detail { display: block; }
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 640px) { .detail-grid { grid-template-columns: 1fr; } }
+
+.detail-col h4 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--verde);
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+.detail-col ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.detail-col ul li {
+  font-size: 0.86rem;
+  color: var(--tinta-mid);
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+.detail-col ul li::before {
+  content: '→';
+  color: var(--verde);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* PROCESO */
+.proceso-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--crema-dark);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.proc-card { background: var(--crema); padding: 40px 30px; }
+.proc-num {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: var(--crema-dark);
+  line-height: 1;
+  margin-bottom: 20px;
+  letter-spacing: -0.05em;
+}
+.proc-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.64rem;
+  color: var(--verde);
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+  display: block;
+}
+.proc-card h3 {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--tinta);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.proc-card p { font-size: 0.87rem; color: var(--tinta-suave); line-height: 1.7; font-weight: 300; margin-bottom: 16px; }
+.proc-items { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.proc-items li {
+  font-size: 0.82rem;
+  color: var(--tinta-suave);
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-weight: 300;
+}
+.proc-items li::before {
+  content: '→';
+  color: var(--verde);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* INVERSIÓN */
+.inv-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 640px) { .inv-row { grid-template-columns: 1fr; } }
+
+.inv-card {
+  background: var(--blanco);
+  border: 1px solid var(--crema-dark);
+  border-radius: 14px;
+  padding: 34px 30px;
+  position: relative;
+}
+.inv-card.destacado {
+  background: var(--verde);
+  border-color: var(--verde);
+  isolation: isolate;
+  overflow: hidden;
+}
+.inv-card.destacado::after {
+  content: '';
+  position: absolute;
+  inset: -50%; width: 200%; height: 200%;
+  pointer-events: none; z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)' opacity='0.36'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  mix-blend-mode: multiply;
+}
+.inv-card.destacado > * { position: relative; z-index: 2; }
+
+.inv-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--verde);
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+  display: block;
+}
+.inv-card.destacado .inv-tag { color: rgba(255,255,255,0.55); }
+.inv-card h3 {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--tinta);
+  margin-bottom: 6px;
+}
+.inv-card.destacado h3 { color: #fff; }
+.inv-precio {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: var(--tinta);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin: 18px 0 6px;
+}
+.inv-card.destacado .inv-precio { color: #fff; }
+.inv-precio span { font-size: 0.82rem; font-weight: 400; color: var(--tinta-suave); letter-spacing: 0; }
+.inv-card.destacado .inv-precio span { color: rgba(255,255,255,0.6); }
+.inv-desc { font-size: 0.88rem; color: var(--tinta-suave); font-weight: 300; line-height: 1.7; margin-bottom: 20px; }
+.inv-card.destacado .inv-desc { color: rgba(255,255,255,0.7); }
+.inv-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.inv-list li {
+  font-size: 0.84rem;
+  color: var(--tinta-mid);
+  display: flex; align-items: flex-start; gap: 9px;
+  font-weight: 300; line-height: 1.5;
+}
+.inv-card.destacado .inv-list li { color: rgba(255,255,255,0.85); }
+.inv-list li::before {
+  content: '→';
+  color: var(--verde);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.inv-card.destacado .inv-list li::before { color: rgba(255,255,255,0.6); }
+.inv-nota {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--crema-dark);
+  font-size: 0.8rem;
+  color: var(--tinta-suave);
+  font-weight: 300;
+  font-style: italic;
+}
+.inv-card.destacado .inv-nota { border-top-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.6); }
+
+/* UPGRADES */
+.up-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 640px) { .up-grid { grid-template-columns: 1fr; } }
+.up-card {
+  background: var(--blanco);
+  border: 1px solid var(--crema-dark);
+  border-radius: 12px;
+  padding: 24px 26px;
+}
+.up-card h3 {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--tinta);
+  margin-bottom: 9px;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+.up-card p { font-size: 0.86rem; color: var(--tinta-suave); line-height: 1.65; font-weight: 300; }
+
+/* CTA */
+.cta-section {
+  background: var(--verde);
+  padding: 110px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.cta-section::after {
+  content: '';
+  position: absolute;
+  inset: -50%; width: 200%; height: 200%;
+  pointer-events: none; z-index: 2;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)' opacity='0.42'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  mix-blend-mode: multiply;
+}
+.cta-section .container { position: relative; z-index: 3; }
+.cta-section h2 {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(1.7rem, 3.5vw, 3rem);
+  color: #fff;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+.cta-section h2 em { font-style: italic; color: rgba(255,255,255,0.3); }
+.cta-section p {
+  font-size: 0.98rem;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 40px;
+  font-weight: 300;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  color: var(--verde-dark);
+  padding: 16px 36px;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-cta:hover { opacity: 0.92; transform: translateY(-2px); }
+.cta-note {
+  margin-top: 18px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.28);
+}
+
+footer {
+  background: var(--crema);
+  padding: 28px 0;
+  border-top: 1px solid var(--crema-dark);
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--tinta-suave);
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  .container { padding: 0 24px; }
+  .prob-grid, .proceso-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  section { padding: 64px 0; }
+  .hero { padding: 64px 0 56px; }
+  .sol-head { padding: 20px 20px; gap: 14px; flex-wrap: wrap; }
+  .sol-detail { padding: 20px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <div class="logo">ND_</div>
+      <div class="nav-meta">// propuesta · décima tango academy</div>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="container">
+    <span class="hero-tag">// sistema comercial · GHL · décima tango academy</span>
+    <h1>Cada lead que entra,<br><em>tracked. Cada venta, visible.</em></h1>
+    <p class="hero-sub">Un sistema que conecta tus ads de Meta con tu proceso de venta — para que sepas exactamente cuántos leads entraron, cuántos compraron, y qué campaña generó cada peso.</p>
+    <div class="hero-meta-row">
+      <div class="hero-meta-item"><div class="lbl">// PROPUESTA PARA</div><div class="val">Décima Tango Academy</div></div>
+      <div class="hero-meta-item"><div class="lbl">// IMPLEMENTACIÓN</div><div class="val">3–4 semanas</div></div>
+      <div class="hero-meta-item"><div class="lbl">// MODALIDAD</div><div class="val">Setup + retainer</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEMA -->
+<section>
+  <div class="container">
+    <span class="section-tag fade-up">// lo que está pasando hoy</span>
+    <h2 class="fade-up">Tenés tráfico pago.<br>¿Pero sabés qué convierte?</h2>
+    <p class="section-sub fade-up">Los ads corren, los leads llegan — pero qué campaña generó cada venta, qué lead quedó sin seguimiento, y cuántos se enfriaron antes de que alguien los llamara.</p>
+    <div class="prob-grid fade-up">
+      <div class="prob-card">
+        <div class="prob-num">01</div>
+        <h3>Sin datos de conversión reales</h3>
+        <p>El publicista ve cuántos leads entran. Pero no sabe cuántos compraron, ni de qué campaña. Sin ese dato, es imposible optimizar la pauta.</p>
+      </div>
+      <div class="prob-card">
+        <div class="prob-num">02</div>
+        <h3>Leads que se enfrían sin seguimiento</h3>
+        <p>Un lead que llega hoy y no recibe respuesta en la primera hora tiene 10x menos chances de cerrar. Sin automatización, ese tiempo depende de que alguien esté disponible.</p>
+      </div>
+      <div class="prob-card">
+        <div class="prob-num">03</div>
+        <h3>Visibilidad cero del proceso de venta</h3>
+        <p>¿Cuántos leads hay activos? ¿Cuántos están en seguimiento? ¿Cuántos dijeron que lo pensaban? Hoy esa info no está en ningún lugar centralizado.</p>
+      </div>
+      <div class="prob-card">
+        <div class="prob-num">04</div>
+        <h3>No shows sin recuperación</h3>
+        <p>Un prospecto que agenda y no se presenta suele desaparecer — porque no hay un workflow automático que lo recupere. Eso es plata que se va.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUCIÓN -->
+<section class="alt">
+  <div class="container">
+    <span class="section-tag fade-up">// la solución</span>
+    <h2 class="fade-up">Un sistema que trabaja<br>mientras vos bailás</h2>
+    <p class="section-sub fade-up">Cada bloque resuelve un dolor concreto. Clic en "ver detalle" si querés ver cómo está armado.</p>
+
+    <div class="sol-stack fade-up">
+
+      <div class="sol-block">
+        <div class="sol-head" onclick="toggleSol(this)">
+          <span class="sol-num">// 01</span>
+          <div class="sol-head-body">
+            <div class="sol-title">Pipeline de captación y venta</div>
+            <p class="sol-resumen">Cada lead que entra desde tus ads entra automáticamente al CRM. La closer ve exactamente qué leads tiene, en qué etapa están, y a cuáles tiene que llamar hoy.</p>
+          </div>
+          <div class="sol-toggle">ver detalle <span class="arr">▾</span></div>
+        </div>
+        <div class="sol-detail">
+          <div class="detail-grid">
+            <div class="detail-col">
+              <h4>// PIPELINE</h4>
+              <ul>
+                <li>Nuevo lead (entrada automática desde Meta Ads / IG)</li>
+                <li>Contactado</li>
+                <li>Agendado</li>
+                <li>Cerrado</li>
+                <li>No show</li>
+                <li>Seguimiento</li>
+                <li>Perdido</li>
+              </ul>
+            </div>
+            <div class="detail-col">
+              <h4>// CAMPOS Y AUTOMATIZACIONES</h4>
+              <ul>
+                <li>Fuente del lead (campaña, adset, anuncio) desde el pixel</li>
+                <li>Asignación automática a la closer disponible</li>
+                <li>Fecha de contacto y fecha de llamada</li>
+                <li>Resultado de la llamada, programa y monto cerrado</li>
+                <li><strong>~65% del pipeline automatizado</strong> — entradas, asignaciones y notificaciones sin intervención manual</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sol-block">
+        <div class="sol-head" onclick="toggleSol(this)">
+          <span class="sol-num">// 02</span>
+          <div class="sol-head-body">
+            <div class="sol-title">Datos de conversión al publicista</div>
+            <p class="sol-resumen">Cada venta cerrada en GHL actualiza automáticamente el pixel de Meta. Tu publicista puede optimizar la pauta con datos reales — no solo leads, sino ventas.</p>
+          </div>
+          <div class="sol-toggle">ver detalle <span class="arr">▾</span></div>
+        </div>
+        <div class="sol-detail">
+          <div class="detail-grid">
+            <div class="detail-col">
+              <h4>// CONVERSIONES A META</h4>
+              <ul>
+                <li>Evento "Lead" cuando entra al CRM</li>
+                <li>Evento "Purchase" cuando se marca como cerrado</li>
+                <li>Valor de la venta incluido (para ROAS real)</li>
+                <li>El publicista ve qué campaña generó qué venta</li>
+              </ul>
+            </div>
+            <div class="detail-col">
+              <h4>// IMPACTO EN LA PAUTA</h4>
+              <ul>
+                <li>Optimización por compras reales, no solo leads</li>
+                <li>ROAS calculable por campaña y por seminario</li>
+                <li>Lookalike audiences basadas en quienes compraron</li>
+                <li>Decisiones de presupuesto basadas en datos reales</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sol-block">
+        <div class="sol-head" onclick="toggleSol(this)">
+          <span class="sol-num">// 03</span>
+          <div class="sol-head-body">
+            <div class="sol-title">Seguimiento y nutrición automática pre-llamada</div>
+            <p class="sol-resumen">El lead entra y en minutos recibe una respuesta automática. Antes de la llamada recibe mensajes que nutren su interés y reducen los no shows. Todo sin que nadie lo tenga que hacer a mano.</p>
+          </div>
+          <div class="sol-toggle">ver detalle <span class="arr">▾</span></div>
+        </div>
+        <div class="sol-detail">
+          <div class="detail-grid">
+            <div class="detail-col">
+              <h4>// FLUJOS AUTOMÁTICOS</h4>
+              <ul>
+                <li>Respuesta inmediata al lead nuevo (primeros 5 minutos)</li>
+                <li>Secuencia de seguimiento si no contestó (D+1, D+3)</li>
+                <li>Recordatorio de llamada 24hs antes</li>
+                <li>Recordatorio de llamada 1hs antes</li>
+                <li>Reactivación de no shows (workflow automático post no-show)</li>
+              </ul>
+            </div>
+            <div class="detail-col">
+              <h4>// RESULTADO ESPERADO</h4>
+              <ul>
+                <li>Tasa de conexión más alta (speed to lead)</li>
+                <li>Más show rate en las llamadas</li>
+                <li>Recuperación automática de no shows</li>
+                <li>Cero leads que se pierden por falta de seguimiento</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sol-block">
+        <div class="sol-head" onclick="toggleSol(this)">
+          <span class="sol-num">// 04</span>
+          <div class="sol-head-body">
+            <div class="sol-title">Dashboard de visibilidad del negocio</div>
+            <p class="sol-resumen">Una pantalla que muestra cómo le va al negocio en tiempo real. Leads por campaña, tasa de cierre, ventas en $$ — sin que nadie tenga que armar ningún reporte.</p>
+          </div>
+          <div class="sol-toggle">ver detalle <span class="arr">▾</span></div>
+        </div>
+        <div class="sol-detail">
+          <div class="detail-grid">
+            <div class="detail-col">
+              <h4>// MÉTRICAS EN VIVO</h4>
+              <ul>
+                <li>Leads totales del mes por canal (IG, FB, orgánico)</li>
+                <li>Leads por campaña y por anuncio</li>
+                <li>Tasa de contacto y tasa de cierre</li>
+                <li>Ventas en $$ por seminario</li>
+                <li>No shows y recuperados</li>
+              </ul>
+            </div>
+            <div class="detail-col">
+              <h4>// PARA QUÉ SIRVE</h4>
+              <ul>
+                <li>Sabés qué campaña está convirtiendo mejor antes de la siguiente pauta</li>
+                <li>Identificás si el problema es captación, contacto o cierre</li>
+                <li>Decisiones con datos, no con sensaciones</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section>
+  <div class="container">
+    <span class="section-tag fade-up">// cómo lo construyo</span>
+    <h2 class="fade-up">Tres fases.<br>Sin sorpresas.</h2>
+    <p class="section-sub fade-up">Un proceso claro de principio a fin. En 3–4 semanas el sistema está vivo.</p>
+    <div class="proceso-grid fade-up">
+      <div class="proc-card">
+        <div class="proc-num">01</div>
+        <span class="proc-tag">// semanas 1–2</span>
+        <h3>Diseño y construcción</h3>
+        <p>Diseñamos el pipeline y los flujos. Validás antes de que toque GHL. Configuro el pixel de Meta y los eventos de conversión.</p>
+        <ul class="proc-items">
+          <li>Pipeline diseñado y validado</li>
+          <li>Campos personalizados</li>
+          <li>Pixel + eventos de conversión</li>
+          <li>Automatizaciones de seguimiento</li>
+          <li>Dashboard configurado</li>
+        </ul>
+      </div>
+      <div class="proc-card">
+        <div class="proc-num">02</div>
+        <span class="proc-tag">// semana 3</span>
+        <h3>Capacitación y lanzamiento</h3>
+        <p>Capacito a la closer en el uso diario. Armamos la base de conocimientos interna. Lanzamos con leads reales y estoy presente la primera semana.</p>
+        <ul class="proc-items">
+          <li>Capacitación a la closer</li>
+          <li>Base de conocimientos interna</li>
+          <li>Lanzamiento + acompañamiento</li>
+          <li>Verificación del pixel con el publicista</li>
+        </ul>
+      </div>
+      <div class="proc-card">
+        <div class="proc-num">03</div>
+        <span class="proc-tag">// en adelante</span>
+        <h3>Acompañamiento mensual</h3>
+        <p>Revisamos métricas reales, ajustamos lo que el uso va mostrando y planificamos la próxima mejora para el siguiente seminario.</p>
+        <ul class="proc-items">
+          <li>Revisión mensual de métricas</li>
+          <li>Ajustes y optimizaciones</li>
+          <li>Soporte directo por WhatsApp</li>
+          <li>Roadmap de mejoras</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVERSIÓN -->
+<section class="alt">
+  <div class="container">
+    <span class="section-tag fade-up">// inversión</span>
+    <h2 class="fade-up">Setup + retainer<br>mensual</h2>
+    <p class="section-sub fade-up">Un pago único para implementar todo el sistema. Una mensualidad para mantenerlo vivo y mejorarlo. El retainer arranca al terminar la implementación.</p>
+    <div class="inv-row fade-up">
+      <div class="inv-card destacado">
+        <span class="inv-tag">// IMPLEMENTACIÓN COMPLETA</span>
+        <h3>Setup</h3>
+        <div class="inv-precio">A convenir <span>· pago único</span></div>
+        <p class="inv-desc">Todo para que el sistema esté vivo: pipeline, automatizaciones, pixel de conversión y capacitación.</p>
+        <ul class="inv-list">
+          <li>Pipeline de captación y venta</li>
+          <li>Automatizaciones de seguimiento y nutrición</li>
+          <li>Pixel Meta + eventos de conversión a ventas</li>
+          <li>Dashboard de métricas</li>
+          <li>Capacitación a la closer</li>
+          <li>Base de conocimientos interna</li>
+          <li>Lanzamiento + 1 semana de acompañamiento</li>
+        </ul>
+        <div class="inv-nota">Pago: 50% al arrancar, 50% al lanzamiento.</div>
+      </div>
+      <div class="inv-card">
+        <span class="inv-tag">// ACOMPAÑAMIENTO CONTINUO</span>
+        <h3>Retainer mensual</h3>
+        <div class="inv-precio">A convenir <span>· por mes</span></div>
+        <p class="inv-desc">Soporte, ajustes y mejora continua. Para que el sistema no quede quieto mientras el negocio crece.</p>
+        <ul class="inv-list">
+          <li>Revisión mensual de métricas</li>
+          <li>Ajustes menores y bugs</li>
+          <li>Soporte directo por WhatsApp</li>
+          <li>4 horas de configuración / mes incluidas</li>
+          <li>Coordinación con publicista si hace falta</li>
+        </ul>
+        <div class="inv-nota">Arranca al terminar la implementación. Cancelable mes a mes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UPGRADES -->
+<section>
+  <div class="container">
+    <span class="section-tag fade-up">// posibles upgrades</span>
+    <h2 class="fade-up">Lo que podemos sumar<br>más adelante</h2>
+    <p class="section-sub fade-up">No incluido en este scope. Tiene sentido evaluarlo cuando el sistema base tenga 2–3 meses de datos reales.</p>
+    <div class="up-grid fade-up">
+      <div class="up-card">
+        <h3>Recordatorios automáticos pre-llamada por WhatsApp</h3>
+        <p>Mensajes automáticos antes de cada llamada para nutrir al lead y reducir no shows. Sin que nadie tenga que mandarlo a mano.</p>
+      </div>
+      <div class="up-card">
+        <h3>Fathom — IA en llamadas</h3>
+        <p>Fathom se une a cada llamada, transcribe y genera un resumen automático que se vuelca al contacto en GHL. La closer deja de tomar notas.</p>
+      </div>
+      <div class="up-card">
+        <h3>Campaña de reactivación de leads fríos</h3>
+        <p>Workflows que recuperan automáticamente leads que dijeron "lo pienso" o quedaron en seguimiento — antes del próximo seminario.</p>
+      </div>
+      <div class="up-card">
+        <h3>Landing mejorada del seminario</h3>
+        <p>Una nueva landing page conectada al CRM, optimizada para conversión — con formulario que entra directo al pipeline sin pasos intermedios.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="container">
+    <h2>¿<em>Arrancamos?</em></h2>
+    <p>Si te cierra, lo hablamos por WhatsApp y empezamos antes del próximo seminario.</p>
+    <a href="https://wa.me/541123662563" class="btn-cta" target="_blank">hablemos por WhatsApp →</a>
+    <div class="cta-note">// nahuel decima · implementación GHL</div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">© 2026 Nahuel Decima · propuesta para Décima Tango Academy</div>
+</footer>
+
+<script>
+function toggleSol(head) {
+  head.closest('.sol-block').classList.toggle('open');
+}
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
